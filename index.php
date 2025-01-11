@@ -73,7 +73,7 @@ include "koneksi.php";
             <div class="container">
               <a class="navbar-brand" href="#">
                 <img src="img/foto-logo.png" alt="Logo" width="60" height="60" class="d-inline-block align-text-center me-2">
-                Jennas's Studio
+                Jenna's Studio
               </a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -169,36 +169,41 @@ include "koneksi.php";
         
         <!--gallery begin-->
         <section id="gallery" class="text-center p-5 bg-danger-subtle">
-            <div class="container">
-                <h1 class="fw-bold display-4 pb-3" id="gallery">Gallery</h1>
-                <div id="carouselExample" class="carousel slide">
-                  <div class="carousel-inner">
-                    <div class="carousel-item active">
-                      <img src="img/foto-7.jpeg" class="d-block w-100" alt="gallery1">
-                    </div>
-                    <div class="carousel-item">
-                      <img src="img/foto-8.jpeg" class="d-block w-100" alt="gallery2">
-                    </div>
-                    <div class="carousel-item">
-                      <img src="img/foto-9.jpeg" class="d-block w-100" alt="gallery3">
-                    </div>
-                    <div class="carousel-item">
-                      <img src="img/foto-10.jpeg" class="d-block w-100" alt="gallery4">
-                    </div>
-                    <div class="carousel-item">
-                      <img src="img/foto-11.jpeg" class="d-block w-100" alt="gallery5">
-                    </div>
-                  </div>
-                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+          <div class="container">
+            <h1 class="fw-bold display-4 pb-3">Gallery</h1>
+            <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <?php
+                    $sql = "SELECT * FROM gallery ORDER BY tanggal DESC";
+                    $hasil = $conn->query($sql);
+
+                    $activeClass = "active";
+                    while ($row = $hasil->fetch_assoc()) {
+                        ?>
+                        <div class="carousel-item <?= $activeClass ?>">
+                            <div class="col">
+                                <div class="card h-100">
+                                    <img src="img/<?= $row["gambar"] ?>" class="card-img-top" alt="Gallery Image" />
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+                        $activeClass = "";
+                    }
+                    ?>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
+                    data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
-                  </button>
-                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
+                    data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
-                  </button>
-                </div>
+                </button>
             </div>
+         </div>
         </section>
         <!--gallery end-->
         <!--schedule-->
